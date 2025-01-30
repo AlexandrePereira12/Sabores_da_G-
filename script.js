@@ -79,6 +79,7 @@ function buscarEndereco() {
             });
     } else {
         alert('Por favor, insira um CEP válido.');
+        
     }
 }
 
@@ -118,6 +119,18 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     }
 });
 
+
+
+document.getElementById('cpf').addEventListener('input', function(e) {
+    var value = e.target.value;
+    var cpfPattern = value.replace(/\D/g, '') // Remove qualquer coisa que não seja número
+                          .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona ponto após o terceiro dígito
+                          .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona ponto após o sexto dígito
+                          .replace(/(\d{3})(\d)/, '$1-$2') // Adiciona traço após o nono dígito
+                          .replace(/(-\d{2})\d+?$/, '$1'); // Impede entrada de mais de 11 dígitos
+    e.target.value = cpfPattern;
+  });
+
 // Armazena os pedidos no localStorage
 document.getElementById('checkout-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -135,9 +148,8 @@ document.getElementById('checkout-form').addEventListener('submit', function(eve
         return;
     }
 
-    if (!/^\d{11}$/.test(cpf)) {
-        alert('Por favor, insira um CPF válido.');
-        return;
+    if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(cpf)) {
+        console.log("CPF inválido!");
     }
 
     // Calcular o valor total dos itens
