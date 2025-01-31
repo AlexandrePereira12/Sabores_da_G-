@@ -52,7 +52,7 @@ function updateCartItems() {
 
     // Exibe o subtotal, o frete e o total
     cartSubtotal.textContent = `R$${subtotal.toFixed(2)}`;
-    let shipping = 2; // Valor fixo de frete
+    let shipping = 1; // Valor fixo de frete
     cartShipping.textContent = `R$${shipping.toFixed(2)}`;
     cartTotal.textContent = `R$${(subtotal + shipping).toFixed(2)}`;
 }
@@ -145,7 +145,7 @@ document.getElementById('checkout-form').addEventListener('submit', function(eve
 
     // Calcular o valor total dos itens
     const total = cart.reduce((total, item) => total + item.price, 0);
-    const shipping = 2; // Valor fixo de frete
+    const shipping = 1; // Valor fixo de frete
     const finalTotal = total + shipping;
 
     // Gerar a mensagem para WhatsApp
